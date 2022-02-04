@@ -10,7 +10,6 @@ router.get('/', (req, res) => {
   pool.query(query)
     .then( result => {
       res.send(result.rows);
-      console.log('result', result);
     })
     .catch(err => {
       console.error('GET failed', err);
@@ -23,7 +22,22 @@ router.get('/', (req, res) => {
  * Add an item for the logged in user to the shelf
  */
 router.post('/', (req, res) => {
-  // endpoint functionality
+  const query = `
+  INSERT INTO "item" ( "description", "image_url")
+  VALUES
+ ( $1, $2);`;
+  const queryParams = [
+    req.body.description, req.body.image_url
+  ];
+
+  pool.query(query, queryParams)
+  .then( result => {
+    res.sendStatus(201);
+  }).catch(err => {
+    console.error(err);
+    res.sendStatus(500);
+  })
+
 });
 
 /**

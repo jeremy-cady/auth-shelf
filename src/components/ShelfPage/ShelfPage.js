@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import ItemForm from '../ItemForm/ItemForm';
 
 
 function ShelfPage() {
@@ -15,6 +16,10 @@ function ShelfPage() {
  
   }
 
+  function onDelete() {
+    console.log('item deleted');
+  }
+
   // renders on page load
   useEffect(() => {
     fetchShelf();
@@ -22,6 +27,7 @@ function ShelfPage() {
 
   return (
     <>
+    <ItemForm />
     <div className="container">
       <h2>Shelf</h2>
       <section>
@@ -30,6 +36,7 @@ function ShelfPage() {
             <div key={item.id}>
               <h5>{item.description}</h5>
               <img src={item.image_url} />
+              <button onClick={onDelete}>Delete</button>
               </div>
 
           )
