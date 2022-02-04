@@ -1,13 +1,21 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
+const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
 /**
  * Get all of the items on the shelf
  */
-router.get('/', (req, res) => {
-  const query = `SELECT * FROM "item";`;
-  pool.query(query)
+router.get('/', rejectUnauthenticated, (req, res) => {
+  console.log('req.user', req.user);
+  const query = `
+  SELECT * FROM "item"
+  WHERE "item"."user_id" = $1;`;
+  const queryParams = [
+    req.user.id
+  ]
+  
+  pool.query(query, queryParams)
     .then( result => {
       res.send(result.rows);
     })
@@ -23,11 +31,11 @@ router.get('/', (req, res) => {
  */
 router.post('/', (req, res) => {
   const query = `
-  INSERT INTO "item" ( "description", "image_url")
+  INSERT INTO "item" ( "description", "image_url", "user_id")
   VALUES
- ( $1, $2);`;
+ ( $1, $2, $3);`;
   const queryParams = [
-    req.body.description, req.body.image_url
+    req.body.description, req.body.image_url, req.user.id
   ];
 
   pool.query(query, queryParams)
