@@ -24,6 +24,7 @@ function* addItems(action) {
 
 function* shelfSaga() {
     yield takeEvery('FETCH_ITEMS', fetchItems);
+    yield takeEvery('ADD_ITEM', addItems);
 }
 
 
