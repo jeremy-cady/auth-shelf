@@ -29,7 +29,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 /**
  * Add an item for the logged in user to the shelf
  */
-router.post('/', (req, res) => {
+router.post('/', rejectUnauthenticated, (req, res) => {
   const query = `
   INSERT INTO "item" ( "description", "image_url", "user_id")
   VALUES
@@ -51,7 +51,7 @@ router.post('/', (req, res) => {
 /**
  * Delete an item if it's something the logged in user added
  */
-router.delete('/:id', (req, res) => {
+router.delete('/:id', rejectUnauthenticated, (req, res) => {
   const query = `
   DELETE from "item"
   WHERE "item"."id" = $1;`;

@@ -33,11 +33,21 @@ function* deleteItem(action) {
     })
 }
 
+function* editItem(action) {
+
+    yield axios.put(`/api/shelf/${action.payload}`)
+
+    yield put ({
+        type: 'FETCH_ITEMS'
+    })
+}
+
 
 function* shelfSaga() {
     yield takeEvery('FETCH_ITEMS', fetchItems);
     yield takeEvery('ADD_ITEM', addItems);
-    yield takeEvery('REMOVE_ITEM', deleteItem);
+    yield takeEvery('REMOVE_ITEM', deleteItem)
+    yield takeEvery('EDIT_ITEM', editItem);
 }
 
 
