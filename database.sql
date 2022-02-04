@@ -15,3 +15,6 @@ CREATE TABLE "item" (
     "image_url" VARCHAR (2083),
     "user_id" INT REFERENCES "user"
 );
+
+INSERT INTO item ("description","image_url","user_id")
+VALUES('textbook','https://bdhs.wayne.k12.in.us/wp-content/uploads/2019/08/textbooks.jpg',1);
