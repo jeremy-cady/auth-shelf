@@ -14,7 +14,7 @@ function* fetchItems() {
 
 // Post function
 function* addItems(action) {
-    console.log('action.payload is', action.payload);
+    
         yield axios.post('/api/shelf', action.payload);
 
         yield put ({
@@ -22,10 +22,22 @@ function* addItems(action) {
         })
 }
 
+// Delete function
+function* deleteItem(action) {
+    console.log('action.payload is', action.payload);
+
+    yield axios.delete(`/api/shelf/${action.payload}`)
+
+    yield put ({
+        type: 'FETCH_ITEMS'
+    })
+}
+
 
 function* shelfSaga() {
     yield takeEvery('FETCH_ITEMS', fetchItems);
     yield takeEvery('ADD_ITEM', addItems);
+    yield takeEvery('REMOVE_ITEM', deleteItem);
 }
 
 

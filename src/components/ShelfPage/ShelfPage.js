@@ -16,8 +16,13 @@ function ShelfPage() {
  
   }
 
-  function onDelete() {
+  function onDelete(item) {
     console.log('item deleted');
+
+    dispatch({
+      type:'REMOVE_ITEM',
+      payload: item.id
+    })
   }
 
   // renders on page load
@@ -36,7 +41,7 @@ function ShelfPage() {
             <div key={item.id}>
               <h5>{item.description}</h5>
               <img src={item.image_url} />
-              <button onClick={onDelete}>Delete</button>
+              <button onClick={() => onDelete(item)}>Delete</button>
               </div>
 
           )
