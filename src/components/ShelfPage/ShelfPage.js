@@ -40,8 +40,8 @@ function ShelfPage() {
           return (
             <div key={item.id}>
               <h5>{item.description}</h5>
-              <img src={item.image_url} />
-              <button onClick={() => onDelete(item)}>Delete</button>
+              <img src={item.image_url} height="300" width="300" alt={item.description}/><br></br>
+              <button style={{ position: "relative", left: 100}} onClick={() => onDelete(item)}>Delete</button>
               </div>
 
           )
