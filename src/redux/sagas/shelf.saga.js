@@ -14,6 +14,7 @@ function* fetchItems() {
 
 // Post function
 function* addItems(action) {
+    console.log('action.payload is', action.payload);
         yield axios.post('/api/shelf', action.payload);
 
         yield put ({

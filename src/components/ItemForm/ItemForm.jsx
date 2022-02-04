@@ -11,12 +11,12 @@ function ItemForm() {
     function handleSubmit() {
         event.preventDefault();
 
-        // Sends 
+       
         dispatch({
             type:'ADD_ITEM',
             payload: {
-                description: {itemDescription},
-                image_url: {itemImgUrl}
+                description: itemDescription,
+                image_url: itemImgUrl
             }
         })
     }
@@ -25,21 +25,24 @@ function ItemForm() {
     return (
 
         <>
+            <h2>Add New Item</h2>
             <form onSubmit={handleSubmit}>
                 <input
                     type="text"
                     placeholder="description"
                     value={itemDescription}
-                    onchange={evt => setItemDescription(evt.target.value)}
+                    onChange={evt => setItemDescription(evt.target.value)}
                 />
                 <input
                     type="text"
                     placeholder="img url"
                     value={itemImgUrl}
-                    onchange={evt => setItemImgUrl(evt.target.value)}
+                    onChange={evt => setItemImgUrl(evt.target.value)}
                 />
                 <button> Submit </button>
             </form>
         </>
     )
 }
+
+export default ItemForm;
